@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="260dp"
+        android:layout_height="380dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_letter"
+            android:layout_width="240dp"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="@drawable/pi_background"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_letter_head"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ic_personal_member"/>
+
+                <TextView
+                    android:id="@+id/text_letter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月下飞天镜"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/text_letter"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:padding="5dp"
+                android:gravity="top"
+                android:background="@android:color/transparent"
+                android:maxLength="50"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_letter_cancel"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="取消"
+            android:layout_alignLeft="@id/ll_letter"
+            android:layout_below="@id/ll_letter"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_cancel_bg"/>
+
+        <Button
+            android:id="@+id/btn_letter_send"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="扔出去"
+            android:layout_alignRight="@id/ll_letter"
+            android:layout_below="@id/ll_letter"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_throw_bg"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>
+

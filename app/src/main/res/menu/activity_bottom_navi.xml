@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="探遇"
+        android:icon="@drawable/ic_heart_gray"
+        android:id="@+id/menu_heart"/>
+
+    <item
+        android:title="信息"
+        android:icon="@drawable/ic_msg_gray"
+        android:id="@+id/menu_msg"/>
+
+    <item
+        android:title="我的"
+        android:icon="@drawable/ic_mine_gray"
+        android:id="@+id/menu_mine"/>
+
+</menu>
