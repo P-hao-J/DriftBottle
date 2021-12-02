@@ -1,19 +1,18 @@
-package com.example.driftbottle;
+package com.example.driftbottle.main;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.driftbottle.R;
 import com.example.driftbottle.adapter.MyFragmentStateAdapter;
 import com.example.driftbottle.databinding.ActivityMainBinding;
 import com.example.driftbottle.ui.meet.MeetFragment;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private static final String TAG = "MainActivity";
     private List<Class> fragments = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
     }
 }

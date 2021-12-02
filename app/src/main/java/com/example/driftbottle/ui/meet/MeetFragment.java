@@ -38,6 +38,7 @@ public class MeetFragment extends Fragment {
     private static final String TAG = "MeetFragment";
     private FragmentMeetBinding binding = null;
     private FragmentActivity activity = null;
+    private ViewGroup rootView = null;
 
 
 
@@ -83,34 +84,35 @@ public class MeetFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rootView = (ViewGroup) view;
 
 
+        setPickBottle();
+        View.OnClickListener listener = setBottleListener(R.layout.popup_window_bg,R.id.btn_letter_cancel,R.id.btn_letter_send,R.id.img_letter_head);
+        binding.imgNewBottle.setOnClickListener(listener);
 
-        binding.imgNewBottle.setOnClickListener(new View.OnClickListener() {
 
+    }
+
+    private View.OnClickListener setBottleListener(int layoutId,int leftBtnId,int rightBtnId,int imageViewId){
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 WindowManager.LayoutParams lp =  activity.getWindow().getAttributes();
                 lp.alpha = 0.3f;
                 activity.getWindow().setAttributes(lp);
 
-                View contentView = getLayoutInflater().inflate(R.layout.popup_window_bg,null);
-                int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
-                int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getMeasuredHeight(), View.MeasureSpec.AT_MOST);
-                contentView.measure(widthMeasureSpec,heightMeasureSpec);      //view1不会自己测量，需要自己调用measure
+                View contentView = getLayoutInflater().inflate(layoutId,null);
+                int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(rootView.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
+                int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(rootView.getMeasuredHeight(), View.MeasureSpec.AT_MOST);
+                contentView.measure(widthMeasureSpec,heightMeasureSpec);
 
+                //下面这句不能用只用一个view参数的接口,
+                PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                PopupWindow popupWindow = new PopupWindow(contentView,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setFocusable(true);
-                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        WindowManager.LayoutParams lp =  activity.getWindow().getAttributes();
-                        lp.alpha = 1f;
-                        activity.getWindow().setAttributes(lp);
-                    }
-                });
 
                 popupWindow.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
@@ -127,22 +129,34 @@ public class MeetFragment extends Fragment {
                     }
                 });
 
-                ImageView headImg = contentView.findViewById(R.id.img_letter_head);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        WindowManager.LayoutParams lp =  activity.getWindow().getAttributes();
+                        lp.alpha = 1f;
+                        activity.getWindow().setAttributes(lp);
+                    }
+                });
+
+                ImageView headImg = contentView.findViewById(imageViewId);
+                Log.d(TAG, "=== contentView--> "+contentView);
+                Log.d(TAG, "=== headImg--> "+headImg);
                 Glide.with(MeetFragment.this).load(R.mipmap.ic_personal_member).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(headImg);
 
-                Button cancelBtn = contentView.findViewById(R.id.btn_letter_cancel);
-                if (cancelBtn!=null){
-                    cancelBtn.setOnClickListener(new View.OnClickListener() {
+                Button throwBackBtn = contentView.findViewById(leftBtnId);
+                if (throwBackBtn!=null){
+                    throwBackBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Log.d(TAG, "=== onClick: dismiss");
                             popupWindow.dismiss();
                         }
                     });
                 }
 
-                Button throwBtn = contentView.findViewById(R.id.btn_letter_send);
-                if (throwBtn!=null){
-                    throwBtn.setOnClickListener(new View.OnClickListener() {
+                Button respondBtn = contentView.findViewById(rightBtnId);
+                if (respondBtn!=null){
+                    respondBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //TODO
@@ -151,14 +165,24 @@ public class MeetFragment extends Fragment {
                     });
                 }
 
-                int x = view.getWidth()/2-contentView.getMeasuredWidth()/2;
-                int y = view.getHeight()/2-contentView.getMeasuredHeight()/2;
-                popupWindow.showAtLocation(view,Gravity.NO_GRAVITY,x,y);
+                int x = rootView.getWidth()/2-contentView.getMeasuredWidth()/2;
+                int y = rootView.getHeight()/2-contentView.getMeasuredHeight()/2;
+                popupWindow.showAtLocation(rootView,Gravity.NO_GRAVITY,x,y);
+
             }
-        });
+        };
+        return listener;
     }
 
-
+    private void setPickBottle(){
+        Log.d(TAG, "=== setPickBottle: ");
+        View.OnClickListener listener = setBottleListener(R.layout.popup_window_bg2,R.id.btn_receive_letter_throw_back,R.id.btn_receive_letter_respond,R.id.img_receive_letter_head);
+        binding.imgBottle1.setOnClickListener(listener);
+        binding.imgBottle2.setOnClickListener(listener);
+        binding.imgBottle3.setOnClickListener(listener);
+        binding.imgBottle4.setOnClickListener(listener);
+        binding.imgBottle5.setOnClickListener(listener);
+    }
 
 
 
