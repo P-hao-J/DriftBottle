@@ -5,12 +5,20 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.driftbottle.R;
 import com.example.driftbottle.adapter.MyFragmentStateAdapter;
@@ -22,12 +30,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private static final String TAG = "MainActivity";
     private List<Class> fragments = null;
+    private Dialog dialog;
 
 
     @Override
@@ -91,4 +102,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void refuseClick(){
+        dialog = new Dialog(MainActivity.this,R.style.TransparentWindowBg);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    public void recoverClickable(){
+        if (dialog == null) return;
+        dialog.setCancelable(true);
+        dialog.dismiss();
+
+    }
+
 }

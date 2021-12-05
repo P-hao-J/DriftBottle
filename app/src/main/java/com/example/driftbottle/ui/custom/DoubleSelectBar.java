@@ -45,6 +45,7 @@ public class DoubleSelectBar extends View {
     float leftAxis;
     float rightAxis;
     private LeftAndRightListener listener = null;
+    private boolean clickable = true;
 
     public DoubleSelectBar(Context context) {
         super(context);
@@ -144,7 +145,13 @@ public class DoubleSelectBar extends View {
     }
 
     @Override
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!clickable) return true;
         float x = event.getX();
         float y = event.getY();
         PointF point = new PointF(x,y);

@@ -52,7 +52,7 @@
                 android:gravity="top"
                 android:background="@android:color/transparent"
                 android:maxLength="50"
-                android:text="阿巴阿巴阿巴"/>
+                android:text=""/>
 
         </LinearLayout>
 

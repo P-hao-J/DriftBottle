@@ -42,7 +42,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/text_letter"
+                android:id="@+id/edittext_letter"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginLeft="15dp"
