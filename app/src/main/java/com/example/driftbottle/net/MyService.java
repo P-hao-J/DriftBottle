@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyService {
 
-    public static final String host = "119.91.138.130:8080";
+    public static final String host = "127.0.0.1:9999";
 
     private MyService(){}
 
